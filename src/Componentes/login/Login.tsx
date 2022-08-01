@@ -1,11 +1,20 @@
 import React from "react";
 import "./Login.css";
-function Login() {
+import { AiFillGoogleCircle } from "react-icons/ai";
+function Login(props: any) {
   return (
     <div className="Login">
       <div className="Login__div">
         <h2>login</h2>
-        <button>log in with google</button>
+        <button
+          className="Login__button"
+          onClick={() => {
+            props.login("google");
+          }}
+        >
+          log in with google
+          <AiFillGoogleCircle className="Login__icon" />
+        </button>
       </div>
     </div>
   );

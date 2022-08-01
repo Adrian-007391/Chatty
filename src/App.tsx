@@ -2,13 +2,29 @@ import { useState } from "react";
 import "./App.css";
 import Login from "./Componentes/login/Login";
 import Chat from "./Componentes/chat/Chat";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 function App() {
   const [user, setuser] = useState<any>(undefined);
-
+  const auth = getAuth();
+  const gpro = new GoogleAuthProvider();
+  const login = (prov) => {
+    signInWithPopup(auth, gpro).then((result) => {
+      setuser(result.user);
+      console.log(result);
+    });
+  };
+  const logout = () => {
+    signOut(auth).then(() => setuser(undefined));
+  };
   if (user === undefined) {
-    return <Login />;
+    return <Login login={login} />;
   } else {
-    return <Chat />;
+    return <Chat user={user} logout={logout} />;
   }
 }
 
