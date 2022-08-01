@@ -5,15 +5,21 @@ import Chat from "./Componentes/chat/Chat";
 import {
   getAuth,
   GoogleAuthProvider,
+  GithubAuthProvider,
   signInWithPopup,
   signOut,
 } from "firebase/auth";
 function App() {
   const [user, setuser] = useState<any>(undefined);
   const auth = getAuth();
-  const gpro = new GoogleAuthProvider();
-  const login = (prov) => {
-    signInWithPopup(auth, gpro).then((result) => {
+  let provider: any = undefined;
+  const login = (prov: string) => {
+    if (prov == "google") {
+      provider = new GoogleAuthProvider();
+    } else if (prov == "github") {
+      provider = new GithubAuthProvider();
+    }
+    signInWithPopup(auth, provider).then((result) => {
       setuser(result.user);
       console.log(result);
     });

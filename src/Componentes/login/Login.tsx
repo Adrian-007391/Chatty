@@ -1,6 +1,6 @@
 import React from "react";
 import "./Login.css";
-import { AiFillGoogleCircle } from "react-icons/ai";
+import { AiFillGoogleCircle, AiFillGithub } from "react-icons/ai";
 function Login(props: any) {
   return (
     <div className="Login">
@@ -14,6 +14,15 @@ function Login(props: any) {
         >
           log in with google
           <AiFillGoogleCircle className="Login__icon" />
+        </button>
+        <button
+          className="Login__button"
+          onClick={() => {
+            props.login("github");
+          }}
+        >
+          log in with github
+          <AiFillGithub className="Login__icon" />
         </button>
       </div>
     </div>
